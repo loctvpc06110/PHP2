@@ -12,8 +12,8 @@ function get_user($email){
         $row = $result->fetch_array(MYSQLI_ASSOC);
         return $row;
     }else{
+        $conn->close();
         return false;
     }
-    $conn->close();
 }
 ?>
