@@ -3,8 +3,7 @@
     "description": "Assignment 1 - PHP2 - PC06110",
     "autoload": {
         "psr-4": {
-            "App\\": "./App/",
-            "Core\\": "./Core/"
+            "App\\": "./App/"
         }
     },
     "authors": [
