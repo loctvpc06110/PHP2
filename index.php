@@ -1,30 +1,38 @@
 <?php
     require_once("./vendor/autoload.php");
 
-    use App\Core\Configs\Database;
-        $db = new Database();
+    // Bài 1
+    // use App\Core\Field;
 
-    require "./App/Templates/header.php";
-    require "./App/Templates/menu.php";
-    require "./App/Templates/navbar.php";
+    // $field = new Field("Họ");
+    // echo $field;
 
-    if (isset($_GET["page"])) {
-        $url = $_GET["page"];
-    }else{
-        $url = "user-list";
-    }
-    
-    switch ($url) {
-        case "user-list":
-            require("./App/Views/user-list.php");
-            break;
-        case "class-list":
-            require("./App/Views/class-list.php");
-            break;
-        case "class-add":
-            require("./App/Views/class-add.php");
-            break;
-    }
+    // Bài 2
+    // use App\Core\Form;
 
-    require "./App/Templates/footer.php";
+    // $form = Form::begin('/submit', 'post');
+    // $field = $form->Field('firstname');
+    // echo $field;
+    // echo Form::end();
+
 ?>
+<!-- Bài 3 -->
+<?php use App\Core\Form; ?>
+
+<div class="container">
+    <h1>Create An Account</h1>
+    <?php $form = Form::begin('','Post'); ?>
+    <div class="row">
+        <div class="col">
+            <?php echo $form->field('FrirstName'); ?>
+        </div>
+        <div class="col">
+            <?php echo $form->field('LastName'); ?>
+        </div>
+    </div>
+    <?php echo $form->field('email'); ?>
+    <?php echo $form->field('password')->passwordField(); ?>
+    <?php echo $form->field('comfirmPassword')->passwordField(); ?>
+   <button type="submit">Submit</button> 
+   <?php echo Form::end();?>
+</div>
