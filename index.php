@@ -27,4 +27,10 @@
     }
 
     require "./App/Templates/footer.php";
+
+    // use App\Models\User;
+
+    // $dataUser = new User('Users');
+    
+    // $getAllUser = $dataUser->getAll();
 ?>
