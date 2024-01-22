@@ -1,38 +1,17 @@
 <?php
-    require_once("./vendor/autoload.php");
+require_once("./vendor/autoload.php");
+use App\Core\Route;
+$router = new Route();
 
-    // Bài 1
-    // use App\Core\Field;
+$router->register("/", function() { 
+        echo "Home";
+});
 
-    // $field = new Field("Họ");
-    // echo $field;
+// Đăng ký các route
+// $router->register('/', [App\Home::class, 'home']);
+// $router->register('/invoices', [App\Invoices::class, 'index']);
+// $router->register('/invoices/create', [App\Invoices::class, 'create']);
 
-    // Bài 2
-    // use App\Core\Form;
-
-    // $form = Form::begin('/submit', 'post');
-    // $field = $form->Field('firstname');
-    // echo $field;
-    // echo Form::end();
-
+// Giải quyết đường dẫn và xử lý route
+echo $router->resolve($_SERVER['REQUEST_URI']);
 ?>
-<!-- Bài 3 -->
-<?php use App\Core\Form; ?>
-
-<div class="container">
-    <h1>Create An Account</h1>
-    <?php $form = Form::begin('','Post'); ?>
-    <div class="row">
-        <div class="col">
-            <?php echo $form->field('FrirstName'); ?>
-        </div>
-        <div class="col">
-            <?php echo $form->field('LastName'); ?>
-        </div>
-    </div>
-    <?php echo $form->field('email'); ?>
-    <?php echo $form->field('password')->passwordField(); ?>
-    <?php echo $form->field('comfirmPassword')->passwordField(); ?>
-   <button type="submit">Submit</button> 
-   <?php echo Form::end();?>
-</div>
