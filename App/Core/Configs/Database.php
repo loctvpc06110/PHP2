@@ -25,7 +25,7 @@ class Database
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             // Thay vì echo và die, hãy ném một exception để giữ mã nguồn linh hoạt
-            throw new PDOException("Connection failed: " . $e->getMessage());
+            // throw new PDOException("Connection failed: " . $e->getMessage());
         }
     }
 
