@@ -3,24 +3,23 @@ namespace App\Core;
 
 use mysqli;
 
-class Database 
-{
-    public function __construct()
-    {
-        $servername = "localhost";
-        $username = "root";
-        $password = "mysql";
+class Database {
+    protected function connect() {
+        try {
+            $servername = "localhost";
+            $username = "root";
+            $password = "mysql";
+            $dbname = "edusystemdb";
 
-        $conn = new mysqli($servername, $username, $password);
+            $conn = new mysqli($servername, $username, $password, $dbname);
 
-        if (!$conn){
-            die("Kết nối thất bại". $conn->connect_error);
+            if ($conn->connect_error) {
+                die("Kết nối thất bại: " . $conn->connect_error);
+            }
+            return $conn;
+        } catch (\Exception $e) {
+            die("Exception: " . $e->getMessage());
         }
-        echo "Kết nối thành công";
-    }
-
-    public function HelloWord(){
-        echo "Hello Word";
     }
 }
 ?>
