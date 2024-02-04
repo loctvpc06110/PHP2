@@ -23,7 +23,7 @@
 
             <!-- Tables -->
             <li class="menu-item">
-              <a href="?page=user-list" class="menu-link">
+              <a href="?url=UserController/index" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user-detail"></i>
                 <div data-i18n="Tables">Thông Tin Người Dùng</div>
               </a>
@@ -36,12 +36,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?page=class-list" class="menu-link">
+                  <a href="?url=ClassController/index" class="menu-link">
                     <div data-i18n="Basic Inputs">Danh Sách Các Lớp</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?page=class-add" class="menu-link">
+                  <a href="?url=ClassController/create" class="menu-link">
                     <div data-i18n="Input groups">Thêm Lớp Mới</div>
                   </a>
                 </li>
@@ -55,12 +55,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?page=course-list" class="menu-link">
+                  <a href="?url=CourseController/index" class="menu-link">
                     <div data-i18n="Basic Inputs">Các Khóa Học</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?page=course-add" class="menu-link">
+                  <a href="?url=CourseController/create" class="menu-link">
                     <div data-i18n="Input groups">Thêm Khóa Học Mới</div>
                   </a>
                 </li>
@@ -74,12 +74,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?page=room-list" class="menu-link">
+                  <a href="?url=RoomController/index" class="menu-link">
                     <div data-i18n="Vertical Form">Xem Phòng Học</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?page=room-add" class="menu-link">
+                  <a href="?url=RoomController/create" class="menu-link">
                     <div data-i18n="Horizontal Form">Thêm Phòng Học Mới</div>
                   </a>
                 </li>
@@ -93,12 +93,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?page=schudule-list" class="menu-link">
+                  <a href="?url=ScheduleController/index" class="menu-link">
                     <div data-i18n="Basic Inputs">Xem Lịch Học</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?page=schudule-add" class="menu-link">
+                  <a href="?url=ScheduleController/create" class="menu-link">
                     <div data-i18n="Input groups">Thêm Lịch Học Mới</div>
                   </a>
                 </li>

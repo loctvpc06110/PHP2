@@ -1,10 +1,17 @@
 <?php
-    namespace App\Models;
+namespace App\Models;
 
-    use App\Models\BaseModel;
+class User extends BaseModel{
+    
+    protected $table = 'users';
 
-    class User extends BaseModel{
-        
+    
+    public function getAllUser(){
+        return $this->getAll();
     }
 
-?>
+    public function getOneUser($id, $nameID){
+        return $this->getOne($id, $nameID);
+    }
+
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Configs;
+namespace App\Models;
 
 use PDO;
 use PDOException;
@@ -24,8 +24,7 @@ class Database
             $this->conn = new PDO($dburl, $username, $password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            // Thay vì echo và die, hãy ném một exception để giữ mã nguồn linh hoạt
-            // throw new PDOException("Connection failed: " . $e->getMessage());
+            throw new PDOException("Connection failed: " . $e->getMessage());
         }
     }
 
@@ -48,25 +47,21 @@ class Database
             $stmt->execute($params);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // Ném exception thay vì sử dụng echo và die
             throw new PDOException("Query failed: " . $e->getMessage());
         }
     }
 
-    // Các hàm khác tương tự...
-
-    public function checkConnection()
+    public function pdo_query_one($sql, $params = [])
     {
-            try {
-                if ($this->conn) {
-                    return 'Connected to database successfully.';
-                } else {
-                    return 'Not connected to database.';
-                }
-            } catch (PDOException $e) {
-                return 'Error checking connection: ' . $e->getMessage();
-            }
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($params);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new PDOException("Query failed: " . $e->getMessage());
+        }
     }
+
 
     public function __destruct()
     {
@@ -76,5 +71,5 @@ class Database
         }
     }
 
-    
+
 }

@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Tên Lớp Học</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Tên lớp: WEB + 3 số" />
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Tên lớp VD: WEB + 3 số" />
                     </div>
         
                     <div class="mb-3">

@@ -3,35 +3,48 @@
      <!-- Content -->
 
      <div class="container-xxl flex-grow-1 container-p-y">
-         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Quản lý/</span> Các Khóa Học</h4>
+         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Quản lý/</span> Phòng Học</h4>
 
          <!-- Hoverable Table rows -->
          <div class="card">
-                <h5 class="card-header">Khóa Học</h5>
+                <h5 class="card-header">Danh Sách Phòng</h5>
                 <div class="table-responsive text-nowrap">
                   <table class="table table-hover">
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Khóa Học</th>
-                        <th>Mô Tả Khóa Học</th>
-                        <th>Ngày Bắt Đầu</th>
-                        <th>Ngày Kết Thúc</th>
+                        <th>Tên Phòng Học</th>
                         <th>Quản Lý</th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                       <tr>
                         <td>1</td>
-                        <td>Javascrip</td>
-                        <td>Khóa học cơ bản Javascrip</td>
-                        <td>01/25/2024</td>
-                        <td>01/25/2024</td>
+                        <td>P-301</td>
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                               <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
+                            </button> 
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="javascript:void(0);"
+                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                              >
+                              <a class="dropdown-item" href="javascript:void(0);"
+                                ><i class="bx bx-trash me-1"></i> Delete</a
+                              >
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>P-302</td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button> 
                             <div class="dropdown-menu">
                               <a class="dropdown-item" href="javascript:void(0);"
                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a

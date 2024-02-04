@@ -1,40 +1,15 @@
 <?php
-    require_once("./vendor/autoload.php");
+require_once("./vendor/autoload.php");
+define("ROOT_URL", "http://localhost:8000/");
 
-    // use App\Core\Configs\Database;
-    //     $db = new Database();
+// use App\Controllers\BaseController;
+use App\Controllers\HomeController;
+use App\Core\Route;
 
-    // require "./App/Templates/header.php";
-    // require "./App/Templates/menu.php";
-    // require "./App/Templates/navbar.php";
+// new BaseController();
 
-    // if (isset($_GET["page"])) {
-    //     $url = $_GET["page"];
-    // }else{
-    //     $url = "user-list";
-    // }
-    
-    // switch ($url) {
-    //     case "user-list":
-    //         require("./App/Views/user-list.php");
-    //         break;
-    //     case "class-list":
-    //         require("./App/Views/class-list.php");
-    //         break;
-    //     case "class-add":   
-    //         require("./App/Views/class-add.php");
-    //         break;
-    //         case "course-list":
-    //             require("./App/Views/course-list.php");
-    //             break;
-    // }
+// new HomeController();
 
-    // require "./App/Templates/footer.php";
-
-    // use App\Models\User;
-
-    // $dataUser = new User('Users');
-    
-    // $getAllUser = $dataUser->getAll();
+new Route;
 
 ?>
