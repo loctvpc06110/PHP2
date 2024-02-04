@@ -17,7 +17,9 @@ $router->get('/', [App\Home::class, 'index'])
         ->post('/loginUser', [App\Login::class, 'loginUser'])
         ->get('/logout', [App\Login::class,'logout'])
         ->get('/forgotpwd', [App\Login::class,'forgotpwd'])
-        ->post('/changepwd', [App\Login::class,'changePwd']);
+        ->post('/changepwd', [App\Login::class,'changePwd'])
+        ->get('/viewRegister', [App\Register::class, 'viewRegister'])
+        ->post('/register', [App\Register::class, 'register']);
     
 // $router->post('/login', [App\Login::class, 'login']);
         // ->post('/upload', [App\Home::class, 'upload']);

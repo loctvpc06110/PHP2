@@ -25,6 +25,7 @@ class Login extends Database{
                     <input type="password" class="form-control" name="password"></input>
                 </div>
                 <a href="/forgotpwd">Đổi Mật Khẩu</a>
+                <a href="/viewRegister">Đăng Ký</a>
                 <button type="submit" value="Submit" name="submit">Submit</buttuon>
             </form>';
         }
