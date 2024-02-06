@@ -3,7 +3,8 @@
     "description": "Assignment",
     "autoload": {
         "psr-4": {
-            "App\\": "./App/"
+            "App\\": "./App/",
+            "PHPMailer\\": "./PHPMailer/"
         }
     },
     "authors": [
@@ -12,5 +13,7 @@
             "email": "loctvpc06110@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
 }

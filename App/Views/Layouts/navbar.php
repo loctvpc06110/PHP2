@@ -47,8 +47,8 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">Thái Lộc</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block"><?=$_SESSION['Admin']?></span>
+                            <small class="text-muted"><?=$_SESSION['Role']?></small>
                           </div>
                         </div>
                       </a>
@@ -58,7 +58,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="?page=log-out">
+                      <a class="dropdown-item" href="<?=ROOT_URL?>?url=LoginController/logout">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>

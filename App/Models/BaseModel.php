@@ -5,16 +5,16 @@ namespace App\Models;
 use App\Interfaces\CrudInterface;
 use App\Models\Database;
 use PDO;
+use PDOException;
 
 abstract class BaseModel implements CrudInterface
 {
 
     protected $table;
 
+    protected $_connection;
 
-    private $_connection;
-
-    private $_query;
+    protected $_query;
 
     public function __construct()
     {
@@ -43,6 +43,25 @@ abstract class BaseModel implements CrudInterface
     }
     public function create(array $data)
     {
+        $this->_query = "INSERT INTO $this->table (";
+        
+        foreach ($data as $key => $value) {
+            $this->_query .= "$key, ";
+        }
+        $this->_query = rtrim($this->_query, ", ");
+
+        $this->_query .=   " ) VALUES (";
+
+        foreach ($data as $key => $value) {
+            $this->_query .= "'$value', ";
+        }
+        $this->_query = rtrim($this->_query, ", ");
+
+        $this->_query .= ")";
+
+        $stmt = $this->_connection->pdo_execute($this->_query);
+
+        return $stmt;
     }
     public function update(int $id, array $data)
     {

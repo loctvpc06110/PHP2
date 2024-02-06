@@ -14,7 +14,7 @@
             <tr>
               <th>#</th>
               <th>Họ Và Tên</th>
-              <th>Tài Khoản</th>
+              <th>Email</th>
               <th>Mặt Khẩu</th>
               <th>Chức Vụ</th>
               <th>Quản Lý</th>
@@ -32,7 +32,7 @@
                   <?= $row['FullName'] ?>
                 </td>
                 <td>
-                  <?= $row['Username'] ?>
+                  <?= $row['Email'] ?>
                 </td>
                 <td>
                   <?= $row['Password'] ?>

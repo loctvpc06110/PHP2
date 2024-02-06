@@ -27,7 +27,7 @@ class UserController extends BaseController
         $userModel = new User();
         $data = $userModel->getAllUser();
 
-        var_dump($data);
+        // var_dump($data);
 
         $this->_renderBase->renderHeader();
         $this->_renderBase->renderMenu();
@@ -44,7 +44,7 @@ class UserController extends BaseController
         
         $data = $userModel->getOneUser($id, 'UserID');
 
-        var_dump($data);
+        // var_dump($data);
 
         $this->_renderBase->renderHeader();
         $this->_renderBase->renderMenu();
