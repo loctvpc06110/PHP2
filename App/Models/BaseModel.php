@@ -63,13 +63,28 @@ abstract class BaseModel implements CrudInterface
 
         return $stmt;
     }
-    public function update(int $id, array $data)
+    public function update(int $id, array $data, $nameID)
     {
-        
+        $this->_query = "UPDATE $this->table SET ";
+        foreach ($data as $key => $value) {
+            $this->_query .= "$key = '$value', ";
+        }
+        $this->_query = rtrim($this->_query, ", ");
+
+        $this->_query .= " WHERE $nameID = $id";
+
+        $stmt = $this->_connection->pdo_execute($this->_query);
+
+        return $stmt;
     }
-    public function delete(int $id): bool
+    public function delete(int $id, $nameID): bool
     {
-        return true;
+        $this->_query = "DELETE FROM $this->table WHERE $nameID = $id";
+
+        $stmt = $this->_connection->pdo_execute($this->_query);
+
+        $affected_rows = $stmt->rowCount();
+        return $affected_rows;
     }
 
 

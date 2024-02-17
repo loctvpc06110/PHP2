@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Core\BaseRender;
+use App\Models\Classes;
 
 class ClassController extends BaseController
 {
@@ -23,16 +24,8 @@ class ClassController extends BaseController
 
     function index()
     {
-        // dữ liệu ở đây lấy từ repositories hoặc model
-        $data = [
-            "products" => [
-                [
-                    "id" => 1,
-                    "name" => "Sản phẩm"
-                ]
-            ]
-        ];
-
+        $model = new Classes();
+        $data = $model->getAllClass();
 
         $this->_renderBase->renderHeader();
         $this->_renderBase->renderMenu();
@@ -43,28 +36,67 @@ class ClassController extends BaseController
 
     function create()
     {
-        // dữ liệu ở đây lấy từ repositories hoặc model
-        $data = [
-            "products" => [
-                [
-                    "id" => 1,
-                    "name" => "Sản phẩm",
-                    "cate" => "Loại 1"
-                ]
-            ]
-        ];
+        $this->_renderBase->renderHeader();
+        $this->_renderBase->renderMenu();
+        $this->_renderBase->renderNavbar();
+        $this->load->render('Admin/Classes/create');
+        $this->_renderBase->renderFooter();
+    }
 
+    function store()
+    {
+        if (isset($_POST['submit'])) {
+            $data = [
+                'ClassName' => $_POST['ClassName']
+            ];
+            $model = new Classes();
+            $result = $model->createClass($data);
+            if ($result) {
+                header('location: ' . ROOT_URL . '?url=ClassController/index');
+            } else { ?>
+                <script>
+                    alert("<?php echo "Thêm không thành công ! " ?>");
+                </script>
+            <?php }
+        }
+        ;
+    }
+
+    function detail($id)
+    {
+        $model = new Classes();
+        $data = $model->getOneClass($id, 'ClassID');
 
         $this->_renderBase->renderHeader();
         $this->_renderBase->renderMenu();
         $this->_renderBase->renderNavbar();
-        $this->load->render('Admin/Classes/create', $data);
+        $this->load->render('Admin/Classes/detail', $data);
         $this->_renderBase->renderFooter();
     }
 
-    function detail($id)
-    {        
-        // dữ liệu ở đây lấy từ repositories hoặc model
-
+    function edit($id)
+    {
+        if (isset($_POST['submit'])) {
+            $data = [
+                'ClassName' => $_POST['ClassName']
+            ];
+            $model = new Classes();
+            $result = $model->update($id, $data, 'ClassID');
+            if ($result) {
+                header('location: ' . ROOT_URL . '?url=ClassController/index');
+            } else { ?>
+                <script>
+                    alert("<?php echo "Sửa không thành công ! " ?>");
+                </script>
+            <?php }
+        }
     }
+
+    function delete($id){
+        $model = new Classes();
+        $result = $model->deleteClass($id, 'ClassID');
+        header('location: ' . ROOT_URL . '?url=ClassController/index');
+    }
+
+
 }

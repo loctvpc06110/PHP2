@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Core\BaseRender;
-
+use App\Models\Course;
 class CourseController extends BaseController
 {
 
@@ -24,10 +24,8 @@ class CourseController extends BaseController
     function index()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
-        $data = [
-       
-        ];
-
+        $model = new Course();
+        $data = $model->getAllCourse();
 
         $this->_renderBase->renderHeader();
         $this->_renderBase->renderMenu();
@@ -39,21 +37,69 @@ class CourseController extends BaseController
     function create()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
-        $data = [
-      
-        ];
-
-
         $this->_renderBase->renderHeader();
         $this->_renderBase->renderMenu();
         $this->_renderBase->renderNavbar();
-        $this->load->render('Admin/Courses/create', $data);
+        $this->load->render('Admin/Courses/create');
         $this->_renderBase->renderFooter();
+    }
+
+    function store(){
+        if (isset($_POST['submit'])){
+            $data = [
+                'CourseName' => $_POST['CourseName'],
+                'Description' => $_POST['Description'],
+                'StartDate' => $_POST['StartDate'],
+                'EndDate' => $_POST['EndDate']
+            ];
+            $model = new Course();
+            $result = $model->createCourse($data);
+            if ($result) {
+                header('location: ' . ROOT_URL . '?url=CourseController/index');
+            } else { ?>
+                <script>
+                alert("<?php echo "Thêm không thành công ! " ?>");
+                </script>
+            <?php }
+        }
     }
 
     function detail($id)
     {        
-        // dữ liệu ở đây lấy từ repositories hoặc model
+        $model = new Course();
+        $data = $model->getOneCourse($id, 'CourseID');
 
+        $this->_renderBase->renderHeader();
+        $this->_renderBase->renderMenu();
+        $this->_renderBase->renderNavbar();
+        $this->load->render('Admin/Courses/detail', $data);
+        $this->_renderBase->renderFooter();
+    }
+
+    function edit($id)
+    {
+        if (isset($_POST['submit'])){
+            $data = [
+                'CourseName' => $_POST['CourseName'],
+                'Description' => $_POST['Description'],
+                'StartDate' => $_POST['StartDate'],
+                'EndDate' => $_POST['EndDate']
+            ];
+            $model = new Course();
+            $result = $model->update($id, $data, 'CourseID');
+            if ($result) {
+                header('location: ' . ROOT_URL . '?url=CourseController/index');
+            } else { ?>
+                <script>
+                alert("<?php echo "Chỉnh Sửa không thành công ! " ?>");
+                </script>
+            <?php }
+        }
+    }
+
+    function delete($id){
+        $model = new Course();
+        $result = $model->deleteCourse($id, 'CourseID');
+        header('location: ' . ROOT_URL . '?url=CourseController/index');
     }
 }

@@ -53,4 +53,10 @@ class UserController extends BaseController
         $this->_renderBase->renderFooter();
 
     }
+
+    function delete($id){
+        $model = new User();
+        $result = $model->deleteUser($id, 'UserID');
+        header('location: ' . ROOT_URL . '?url=UserController/index');
+    }
 }

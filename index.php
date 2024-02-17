@@ -21,9 +21,3 @@ new Route;
 
 ?>
 
-<?php
-    // if (!isset($_SESSION['Admin'])){
-    //     header('location: ' . ROOT_URL . '?url=LoginController/login');
-    //     exit();
-    // }
-?>

@@ -23,30 +23,39 @@
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                      <?php
+                      $i = 1;
+                      foreach($data as $row):
+                      ?>
                       <tr>
-                        <td>1</td>
-                        <td>P-101</td>
-                        <td>WEB303</td>
-                        <td>PHP2</td>
-                        <td>loctcpc06110</td>
-                        <td><span class="badge bg-label-success me-1">13:00</span></td>
-                        <td><span class="badge bg-label-danger me-1">13:00</span></td>
+                        <td><?= $i++?></td>
+                        <td><?= $row['RoomName']?></td>
+                        <td><?= $row['ClassName']?></td>
+                        <td><?= $row['CourseName']?></td>
+                        <td><?= $row['FullName']?></td>
+                        <td><span class="badge bg-label-success me-1"><?= $row['StartTime']?></span></td>
+                        <td><span class="badge bg-label-danger me-1"><?= $row['EndTime']?></span></td>
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button> 
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
+                              <a class="dropdown-item" 
+                                href="<?=ROOT_URL?>?url=ScheduleController/detail/<?= $row['ClassSchID'] ?>"
                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                               >
-                              <a class="dropdown-item" href="javascript:void(0);"
+                              <a onclick=" return confirm('Bạn có chắc rằng muốn xóa ?');" class="dropdown-item" 
+                                href="<?=ROOT_URL?>?url=ScheduleController/delete/<?= $row['ClassSchID'] ?>"
                                 ><i class="bx bx-trash me-1"></i> Delete</a
                               >
                             </div>
                           </div>
                         </td>
                       </tr>
+                      <?php
+                      endforeach;
+                      ?>
                     </tbody>
                   </table>
                 </div>

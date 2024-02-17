@@ -6,7 +6,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="<?=ROOT_URL?>?url=ScheduleController/index" class="app-brand-link">
               <span>
                 <img src="./Public/Assets/img/logo/eduslLogo.png" alt="Logo" width="180px">
               </span>
@@ -21,11 +21,10 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản lý</span></li>
             <!-- Forms -->
 
-            <!-- Tables -->
             <li class="menu-item">
               <a href="?url=UserController/index" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user-detail"></i>
-                <div data-i18n="Tables">Thông Tin Người Dùng</div>
+                <div data-i18n="Tables">Thông Tin Người Dùng</div>x 
               </a>
             </li>
 

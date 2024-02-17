@@ -39,12 +39,13 @@ class User extends BaseModel
 
         if ($password != $stmt["Password"]) {
             $this->err = 'Thông tin đăng nhập không chính xác !';
+            header('location: ' . ROOT_URL . '?url=LoginController/login');
         } else {
             $_SESSION['Admin'] = $stmt['FullName'];
             $_SESSION['Email'] = $stmt['Email'];
             $_SESSION['Role'] = $stmt['Role'];
 
-            header('location: ' . ROOT_URL . '?url=UserController/index');
+            header('location: ' . ROOT_URL . '?url=ScheduleController/index');
         }
     }
 
@@ -153,6 +154,11 @@ class User extends BaseModel
     public function resetPassword()
     {
 
+    }
+
+    public function deleteUser($id, $nameID)
+    {
+        return $this->delete($id, $nameID);
     }
 
 }

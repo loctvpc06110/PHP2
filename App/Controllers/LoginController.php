@@ -56,14 +56,13 @@ class LoginController extends BaseController
                 'password' => $password,
             ];
 
-            var_dump($inputData);
-
             $user = new User();
 
             // $isEmtyInput = $user->validateEmptyInput($inputData);
 
             // if ($isEmtyInput){
-                $user->login($email, $password);
+            $login = $user->login($email, $password);
+
             // }else{
             //     echo 'Vui lòng nhập đủ thông tin !';
             // }
