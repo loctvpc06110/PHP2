@@ -1,3 +1,8 @@
+<?php
+    if (!isset($_SESSION['Admin'])){
+        echo "<script>document.location='".ROOT_URL."?url=LoginController/login';</script>";
+    }
+?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->

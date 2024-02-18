@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Core\BaseRender;
 use App\Models\Room;
+use App\Models\Schedule;
 
 class RoomController extends BaseController
 {
@@ -45,25 +46,33 @@ class RoomController extends BaseController
         $this->_renderBase->renderFooter();
     }
 
-    function store(){
-        if (isset($_POST['submit'])){
-            $data = [
-                'RoomName' => $_POST['RoomName']
-            ];
-            $model = new Room();
-            $result = $model->createRoom($data);
-            if ($result) {
-                header('location: ' . ROOT_URL . '?url=RoomController/index');
-            } else { ?>
-                <script>
-                alert("<?php echo "Thêm không thành công ! " ?>");
-                </script>
-            <?php }
-        };
+    function store()
+    {
+        if (isset($_POST['submit'])) {
+            if ($_POST['RoomName'] == "") {
+                $data = [
+                    'error' => 'Vui lòng điền đầy đủ !'
+                ];
+                $this->_renderBase->renderHeader();
+                $this->_renderBase->renderMenu();
+                $this->_renderBase->renderNavbar();
+                $this->load->render('Admin/Rooms/create', $data);
+                $this->_renderBase->renderFooter();
+            } else {
+                $data = [
+                    'RoomName' => $_POST['RoomName']
+                ];
+                $model = new Room();
+                $result = $model->createRoom($data);
+                if ($result) {
+                    header('location: ' . ROOT_URL . '?url=RoomController/index');
+                }
+            }
+        }
     }
 
     function detail($id)
-    {        
+    {
         $model = new Room();
         $data = $model->getOneRoom($id, 'RoomID');
 
@@ -76,7 +85,7 @@ class RoomController extends BaseController
 
     function edit($id)
     {
-        if (isset($_POST['submit'])){
+        if (isset($_POST['submit'])) {
             $data = [
                 'RoomName' => $_POST['RoomName']
             ];
@@ -86,15 +95,32 @@ class RoomController extends BaseController
                 header('location: ' . ROOT_URL . '?url=RoomController/index');
             } else { ?>
                 <script>
-                alert("<?php echo "Chỉnh Sửa không thành công ! " ?>");
+                    alert("<?php echo "Chỉnh Sửa không thành công ! " ?>");
                 </script>
             <?php }
         }
     }
 
-    function delete($id){
+    function delete($id)
+    {
         $model = new Room();
-        $result = $model->deleteRoom($id, 'RoomID');
-        header('location: ' . ROOT_URL . '?url=RoomController/index');
+        $modelSchedule = new Schedule();
+        $check = $modelSchedule->checkFK($id, 'RoomID');
+
+        if ($check == null) {
+            $model->deleteRoom($id, 'RoomID');
+            header('location: ' . ROOT_URL . '?url=RoomController/index');
+        } else {
+            $err = [
+                'title' => 'Xóa không thàng công !',
+                'error' => 'Hiện tại phòng học đang được sử dụng không thể xóa.'
+            ];
+            if ($err != null) {
+                $this->_renderBase->renderHeaderErr();
+                $this->_renderBase->renderError($err);
+                $this->_renderBase->renderFooterErr();
+            }
+
+        }
     }
 }

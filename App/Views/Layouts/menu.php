@@ -6,7 +6,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="<?=ROOT_URL?>?url=ScheduleController/index" class="app-brand-link">
+            <a href="<?=ROOT_URL?>?url=HomeController/home" class="app-brand-link">
               <span>
                 <img src="./Public/Assets/img/logo/eduslLogo.png" alt="Logo" width="180px">
               </span>
@@ -20,11 +20,17 @@
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản lý</span></li>
             <!-- Forms -->
+            <li class="menu-item">
+              <a href="<?=ROOT_URL?>?url=HomeController/home" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-receipt"></i>
+                <div data-i18n="Tables">Trang Chủ</div>
+              </a>
+            </li>
 
             <li class="menu-item">
-              <a href="?url=UserController/index" class="menu-link">
+              <a href="<?=ROOT_URL?>?url=UserController/index" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user-detail"></i>
-                <div data-i18n="Tables">Thông Tin Người Dùng</div>x 
+                <div data-i18n="Tables">Người Dùng</div>
               </a>
             </li>
 
@@ -35,12 +41,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?url=ClassController/index" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=ClassController/index" class="menu-link">
                     <div data-i18n="Basic Inputs">Danh Sách Các Lớp</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?url=ClassController/create" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=ClassController/create" class="menu-link">
                     <div data-i18n="Input groups">Thêm Lớp Mới</div>
                   </a>
                 </li>
@@ -54,12 +60,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?url=CourseController/index" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=CourseController/index" class="menu-link">
                     <div data-i18n="Basic Inputs">Các Khóa Học</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?url=CourseController/create" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=CourseController/create" class="menu-link">
                     <div data-i18n="Input groups">Thêm Khóa Học Mới</div>
                   </a>
                 </li>
@@ -73,12 +79,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?url=RoomController/index" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=RoomController/index" class="menu-link">
                     <div data-i18n="Vertical Form">Xem Phòng Học</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?url=RoomController/create" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=RoomController/create" class="menu-link">
                     <div data-i18n="Horizontal Form">Thêm Phòng Học Mới</div>
                   </a>
                 </li>
@@ -92,12 +98,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="?url=ScheduleController/index" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=ScheduleController/index" class="menu-link">
                     <div data-i18n="Basic Inputs">Xem Lịch Học</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="?url=ScheduleController/create" class="menu-link">
+                  <a href="<?=ROOT_URL?>?url=ScheduleController/create" class="menu-link">
                     <div data-i18n="Input groups">Thêm Lịch Học Mới</div>
                   </a>
                 </li>

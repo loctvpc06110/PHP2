@@ -39,6 +39,5 @@ class Classes extends BaseModel
     {
         return $this->delete($id, $nameID);
     }
-    
 
 }

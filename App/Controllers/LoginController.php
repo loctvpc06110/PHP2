@@ -49,23 +49,31 @@ class LoginController extends BaseController
     function loginAdmin()
     {
         if(isset($_POST['submit'])){
+            if ($_POST['email'] == "" || $_POST['password'] == ""){
+                $data = [
+                    'error' => 'Vui lòng điền đủ thông tin !'
+                ];
+                $this->load->render('Admin/Login/login', $data);
+            } else {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $inputData = [
-                'email' => $email,
-                'password' => $password,
-            ];
 
             $user = new User();
+            $login = $user->checkLogin($email);  
 
-            // $isEmtyInput = $user->validateEmptyInput($inputData);
-
-            // if ($isEmtyInput){
-            $login = $user->login($email, $password);
-
-            // }else{
-            //     echo 'Vui lòng nhập đủ thông tin !';
-            // }
+        if (!password_verify($password, $login['Password'])){
+                $data = [
+                    'error' => 'Email hoặc Mật Khẩu không chính xác !'
+                ];
+                $this->load->render('Admin/Login/login', $data);
+            }
+            else {
+                $_SESSION['Admin'] = $login['FullName'];
+                $_SESSION['Role'] = $login['Role'];
+                header('location: ' . ROOT_URL . '?url=HomeController/home');
+            }
+            }
+            
         }
 
     }
@@ -74,9 +82,15 @@ class LoginController extends BaseController
     {
         $err = '';
         if (isset($_POST['submit'])){
+            if ($_POST['email'] == "" || $_POST['password'] == "" || $_POST['fullname'] == ""){
+                $data = [
+                    'error' => 'Vui lòng điền đủ thông tin !'
+                ];
+                $this->load->render('Admin/Login/register', $data);
+            }
             $data = [
                 'Email' => $_POST['email'],
-                'Password' => $_POST['password'],
+                'Password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                 'FullName' => $_POST['fullname']
             ];
 
@@ -84,15 +98,13 @@ class LoginController extends BaseController
 
             if ($register->invalidEmail($data['Email']) == false){
                 $result = $register->create($data);
-                if ($result) {
                     header('location: ' . ROOT_URL . '?url=LoginController/login');
-                } else {
-                    echo 'them loi';
-                }
             } else {
-                $err = 'Email Không Hợp Lệ !';
+                $data = [
+                    'error' => 'Email không hợp lệ !'
+                ];
                 // echo 'lỗi email';
-                header('location: ' . ROOT_URL . '?url=LoginController/register');
+                $this->load->render('Admin/Login/register', $data);
             }
       
         }

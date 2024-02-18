@@ -35,7 +35,15 @@
                             <input name="EndDate" type="date" id="endDate" class="form-control" id="exampleFormControlInput1"
                                 >
                         </div>
-
+                        <?php 
+                        if($data['error'] != ''){
+                            ?>
+                                <div class="mb-3 alert alert-danger">
+                                    <?= $data['error']?>
+                                </div>
+                            <?php
+                        }
+                        ?> 
                         <div class=" mb-3">
                             <button name="submit" type="submit" class="btn btn-primary">Thêm</button>
                         </div>

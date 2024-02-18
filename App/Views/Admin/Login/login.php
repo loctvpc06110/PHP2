@@ -63,7 +63,7 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
+                <a class="app-brand-link gap-2">
                 <span>
                 <img src="./Public/Assets/img/logo/eduslLogo.png" alt="Logo" width="110px">
               </span>
@@ -109,6 +109,15 @@
                     <label class="form-check-label" for="remember-me"> Lưu tài khoản </label>
                   </div>
                 </div>
+                <?php 
+                        if($data['error'] != ''){
+                            ?>
+                                <div class="mb-3 alert alert-danger">
+                                    <?= $data['error']?>
+                                </div>
+                            <?php
+                        }
+                    ?> 
                 <div class="mb-3">
                   <button class="btn btn-primary d-grid w-100" name="submit" type="submit">Đăng Nhập</button>
                 </div>

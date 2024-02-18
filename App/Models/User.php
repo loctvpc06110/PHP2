@@ -26,27 +26,13 @@ class User extends BaseModel
         return $this->getOne($id, $nameID);
     }
 
-    public function login($email, $password)
+    public function checkLogin($email)
     {
-        $query = "SELECT * FROM $this->table WHERE Email = :email";
-        $params = [':email' => $email];
+        $this->_query = "SELECT * FROM $this->table WHERE Email LIKE '$email'";
 
-        $stmt = $this->_connection->pdo_query_one($query, $params);
+        $stmt = $this->_connection->pdo_query_one($this->_query);
 
-        if (!$stmt) {
-            return false;
-        }
-
-        if ($password != $stmt["Password"]) {
-            $this->err = 'Thông tin đăng nhập không chính xác !';
-            header('location: ' . ROOT_URL . '?url=LoginController/login');
-        } else {
-            $_SESSION['Admin'] = $stmt['FullName'];
-            $_SESSION['Email'] = $stmt['Email'];
-            $_SESSION['Role'] = $stmt['Role'];
-
-            header('location: ' . ROOT_URL . '?url=ScheduleController/index');
-        }
+        return $stmt;
     }
 
     public function logout()
@@ -156,6 +142,10 @@ class User extends BaseModel
 
     }
 
+    public function updateUser($id, $data, $nameID)
+    {
+        return $this->update($id, $data, $nameID);
+    }
     public function deleteUser($id, $nameID)
     {
         return $this->delete($id, $nameID);

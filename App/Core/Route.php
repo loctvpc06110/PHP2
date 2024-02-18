@@ -5,7 +5,7 @@ namespace App\Core;
 class Route
 {
     public $url;
-    public $nameController = "UserController";
+    public $nameController = "HomeController";
     public $nameMethod = "home";
     public $path = 'App/Controllers/';
     public $controller;
@@ -37,7 +37,7 @@ class Route
             $className        = $this->path . $this->nameController;
             $className        = preg_replace("~\/~", "\\", $className);
             $this->controller = new $className;
-            $this->controller->homePage();
+            // $this->controller->homePage();
         } else {
             $this->nameController = $this->url[0];
             $file                 = __DIR__ . '/../Controllers/' . $this->nameController . '.php';
@@ -49,11 +49,11 @@ class Route
                 if (class_exists($className)) {
                     $this->controller = new $className;
                 } else {
-                    header('Location:' . ROOT_URL . 'UserController/Error');
+                    header('Location:' . ROOT_URL . '?url=UserController/err404');
                 }
             } else {
 
-                header('Location:' . ROOT_URL . 'UserController/Error');
+                header('Location:' . ROOT_URL . '?url=UserController/err404');
             }
         }
     }
@@ -65,7 +65,7 @@ class Route
             if (method_exists($this->controller, $this->nameMethod)) {
                 $this->controller->{$this->nameMethod}($this->url[2]);
             } else {
-                header('Location:' . ROOT_URL . 'UserController/Error');
+                header('Location:' . ROOT_URL . '?url=UserController/err404');
             }
         } else {
             // kiểm tra hàm có tồn tại hàm không có tham số 
@@ -75,7 +75,7 @@ class Route
                 if (method_exists($this->controller, $this->nameMethod)) {
                     $this->controller->{$this->nameMethod}();
                 } else {
-                    header('Location:' . ROOT_URL . 'UserController/Error');
+                    header('Location:' . ROOT_URL . '?url=UserController/err404');
                 }
             }
         }

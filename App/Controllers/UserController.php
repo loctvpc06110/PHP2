@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Core\BaseRender;
 use App\Models\User;
+use App\Models\Schedule;
 
 class UserController extends BaseController
 {
@@ -20,7 +21,13 @@ class UserController extends BaseController
         $this->_renderBase = new BaseRender();
     }
 
-
+    function err404()
+    {
+        $this->_renderBase->renderHeaderErr();
+        $this->_renderBase->renderError404();
+        $this->_renderBase->renderFooterErr();
+    }
+    
     function index()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
@@ -41,7 +48,6 @@ class UserController extends BaseController
         // dữ liệu ở đây lấy từ repositories hoặc model
 
         $userModel = new User();
-        
         $data = $userModel->getOneUser($id, 'UserID');
 
         // var_dump($data);
@@ -54,9 +60,36 @@ class UserController extends BaseController
 
     }
 
+    function edit($id){
+        if (isset($_POST['submit'])){
+           $data = [
+                'Role' => $_POST['role']
+           ];
+           $model = new User();
+           $model->updateUser($id, $data, 'UserID');
+           header('location: ' . ROOT_URL . '?url=UserController/index');
+        }
+    }
+
     function delete($id){
         $model = new User();
-        $result = $model->deleteUser($id, 'UserID');
-        header('location: ' . ROOT_URL . '?url=UserController/index');
+        $modelSchedule = new Schedule();
+        $check = $modelSchedule->checkFK($id, 'TeacherID');
+
+        if ($check == null) {
+            $result = $model->deleteUser($id, 'UserID');
+            header('location: ' . ROOT_URL . '?url=UserController/index');
+        } else {
+            $err = [
+                'title' => 'Xóa không thàng công !',
+                'error' => 'Hiện tại người này đang được xếp vào lịch học nào đó không thể xóa.'
+            ];
+            if ($err != null) {
+                $this->_renderBase->renderHeaderErr();
+                $this->_renderBase->renderError($err);
+                $this->_renderBase->renderFooterErr();
+            }
+
+        }
     }
 }

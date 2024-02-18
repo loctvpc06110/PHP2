@@ -55,7 +55,7 @@
                     <div class="card-body">
                         <!-- Logo -->
                         <div class="app-brand justify-content-center">
-                            <a href="index.html" class="app-brand-link gap-2">
+                            <a class="app-brand-link gap-2">
                                 <span>
                                     <img src="./Public/Assets/img/logo/eduslLogo.png" alt="Logo" width="110px">
                                 </span>
@@ -64,7 +64,8 @@
                         </div>
                         <!-- /Logo -->
 
-                        <form id="formAuthentication" class="mb-3" action="<?=ROOT_URL?>?url=LoginController/create" method="post">
+                        <form id="formAuthentication" class="mb-3" action="<?= ROOT_URL ?>?url=LoginController/create"
+                            method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Họ Tên</label>
                                 <input type="text" class="form-control" id="username" name="fullname"
@@ -84,6 +85,15 @@
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
+                            <?php
+                            if ($data['error'] != '') {
+                                ?>
+                                <div class="mb-3 alert alert-danger">
+                                    <?= $data['error'] ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                             <div class="mb-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="terms-conditions"
@@ -94,12 +104,13 @@
                                     </label>
                                 </div>
                             </div>
+                            
                             <button class="btn btn-primary d-grid w-100" type="submit" name="submit">Đăng Ký</button>
                         </form>
 
                         <p class="text-center">
                             <span>Bạn đã có tài khoản?</span>
-                            <a href="<?=ROOT_URL?>?url=LoginController/login">
+                            <a href="<?= ROOT_URL ?>?url=LoginController/login">
                                 <span> Đăng Nhập</span>
                             </a>
                         </p>

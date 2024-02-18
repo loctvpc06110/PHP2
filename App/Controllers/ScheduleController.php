@@ -61,23 +61,30 @@ class ScheduleController extends BaseController
 
     function store(){
         if (isset($_POST['submit'])){
-            $data = [
-                'RoomID' => $_POST['Room'],
-                'ClassID' => $_POST['Class'],
-                'CourseID' => $_POST['Course'],
-                'TeacherID' => $_POST['Teacher'],
-                'StartTime' => $_POST['StartTime'],
-                'EndTime' => $_POST['EndTime']
-            ];
-            $model = new Schedule();
-            $result = $model->createSchedule($data);
-            if ($result) {
-                header('location: ' . ROOT_URL . '?url=ScheduleController/index');
-            } else { ?>
-                <script>
-                alert("<?php echo "Thêm không thành công ! " ?>");
-                </script>
-            <?php }
+            if ( $_POST['Room'] == "" || $_POST['Class'] == "" || $_POST['Course'] == "" || $_POST['Teacher'] == "" || $_POST['StartTime'] == "" || $_POST['EndTime'] == ""){    
+                    $data = [
+                        'error' => 'Vui lòng điền đầy đủ !'
+                    ];
+                    $this->_renderBase->renderHeader();
+                    $this->_renderBase->renderMenu();
+                    $this->_renderBase->renderNavbar();
+                    $this->load->render('Admin/Schedules/create', $data);
+                    $this->_renderBase->renderFooter();
+            } else {
+                $data = [
+                    'RoomID' => $_POST['Room'],
+                    'ClassID' => $_POST['Class'],
+                    'CourseID' => $_POST['Course'],
+                    'TeacherID' => $_POST['Teacher'],
+                    'StartTime' => $_POST['StartTime'],
+                    'EndTime' => $_POST['EndTime']
+                ];
+                $model = new Schedule();
+                $result = $model->createSchedule($data);
+                if ($result) {
+                    header('location: ' . ROOT_URL . '?url=ScheduleController/index');
+                }
+            }
         }
     }
 

@@ -63,7 +63,7 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
+                <a class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                   <img src="./Public/Assets/img/logo/eduslLogo.png" alt="Logo" width="110px">
                   </span>

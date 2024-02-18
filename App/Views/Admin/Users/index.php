@@ -1,3 +1,8 @@
+<?php
+    if (!isset($_SESSION['Admin'])){
+        echo "<script>document.location='".ROOT_URL."?url=LoginController/login';</script>";
+    }
+?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
@@ -15,7 +20,6 @@
               <th>#</th>
               <th>Họ Và Tên</th>
               <th>Email</th>
-              <th>Mặt Khẩu</th>
               <th>Chức Vụ</th>
               <th>Quản Lý</th>
             </tr>
@@ -33,9 +37,6 @@
                 </td>
                 <td>
                   <?= $row['Email'] ?>
-                </td>
-                <td>
-                  <?= $row['Password'] ?>
                 </td>
                 <td>
                   <?= $row['Role'] ?>

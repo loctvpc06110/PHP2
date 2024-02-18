@@ -1,3 +1,8 @@
+<?php
+    if (!isset($_SESSION['Admin'])){
+        echo "<script>document.location='".ROOT_URL."?url=LoginController/login';</script>";
+    }
+?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
@@ -75,7 +80,15 @@
                             <label for="exampleFormControlInput1" class="form-label">Giờ Kết Thúc</label>
                             <input name="EndTime" type="time" class="form-control" id="exampleFormControlInput1">
                         </div>
-
+                        <?php 
+                        if($data['error'] != ''){
+                            ?>
+                                <div class="mb-3 alert alert-danger">
+                                    <?= $data['error']?>
+                                </div>
+                            <?php
+                        }
+                        ?> 
                         <div class=" mb-3">
                             <button name="submit" type="submit" class="btn btn-primary">Thêm</button>
                         </div>
