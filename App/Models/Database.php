@@ -16,12 +16,13 @@ class Database
 
     private function connect()
     {
-        $dburl = "mysql:host=localhost;dbname=EduSystemDB;charset=utf8";
-        $username = 'root';
-        $password = 'mysql';
+        $servername = "localhost"; // Tên máy chủ MySQL
+        $username = "root"; // Tên người dùng MySQL
+        $password = "mysql"; // Mật khẩu MySQL
+        $dbname = "edusystemdb";
 
         try {
-            $this->conn = new PDO($dburl, $username, $password);
+            $this->conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             throw new PDOException("Connection failed: " . $e->getMessage());

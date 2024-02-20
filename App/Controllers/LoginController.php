@@ -117,9 +117,19 @@ class LoginController extends BaseController
             $email = $_POST['email'];
             $token = bin2hex($email . time());
 
-            $verify = new User();
-            $verify->verificationEmail($email, $token);
-
+            $model = new User();
+            $verify = $model->verificationEmail($email);
+            if ($verify != null){
+                $upToken = $model->updToken($email, $token);
+                if ($upToken) {
+                    $data = [
+                        'email' => $email
+                    ];
+                    $this->load->render('Admin/Login/sendEmail', $data);
+                }
+            } else {
+                header('location: ' . ROOT_URL . '?url=LoginController/login');
+            }
         }
     }
 

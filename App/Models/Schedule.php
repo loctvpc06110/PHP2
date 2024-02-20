@@ -1,10 +1,6 @@
 <?php
 namespace App\Models;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
 use PDO;
 use PDOException;
 

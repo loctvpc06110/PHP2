@@ -22,7 +22,7 @@ class HomeController extends BaseController
     function __construct()
     {
         parent::__construct();
-        $this->_renderBase = new BaseRender();
+        $this->_renderBase = new BaseRender();  
     }
 
 

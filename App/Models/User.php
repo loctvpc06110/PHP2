@@ -1,12 +1,9 @@
 <?php
 namespace App\Models;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
 use PDO;
 use PDOException;
+use PHPMailer\Test\PHPMailer\MailTransportTest;
 
 class User extends BaseModel
 {
@@ -61,80 +58,21 @@ class User extends BaseModel
         return false; // Địa chỉ email hợp lệ
     }
 
-    public function verificationEmail($email, $token)
+    public function verificationEmail($email)
     {
-        $query = "SELECT * FROM $this->table WHERE Email = :email";
-        $params = [':email' => $email];
+        $this->_query = "SELECT * FROM $this->table WHERE Email LIKE '$email'";
 
-        $stmt = $this->_connection->pdo_query_one($query, $params);
+        $stmt = $this->_connection->pdo_query_one($this->_query);
 
-        if (!$stmt) {
-            ?>
-            <script>
-                alert("<?php echo "Xin lỗi, email này không tồn tại ! " ?>");
-                setTimeout(function () {
-                    window.location.href = "<?php echo ROOT_URL . '?url=LoginController/forgot'; ?>";
-                }, 1);
-            </script>
-            <?php
-        } else {
-            $query = "UPDATE $this->table SET Access_Token = :token WHERE Email = :email";
-            $params = [
-                ':email' => $email,
-                ':token' => $token
-            ];
-            $stmt = $this->_connection->pdo_execute($query, $params);
-            ?>
-            <?php
-            if ($stmt) {
-                //session_start ();
-                $_SESSION['token'] = $token;
-                $_SESSION['email'] = $email;
+        return $stmt;
+    }
 
-                // Tạo một đối tượng PHPMailer
+    public function updToken($email, $token){
+        $this->_query = "UPDATE Users SET Access_Token = '$token' WHERE Email LIKE '$email'";
 
-                require "Mail/phpmailer/PHPMailerAutoload.php";
-                $mail = new PHPMailer;
+        $stmt = $this->_connection->pdo_execute($this->_query);
 
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->Port = 587;
-                $mail->SMTPAuth = true;
-                $mail->SMTPSecure = 'tls';
-
-                // h-hotel account
-                $mail->Username = 'loctvpc06110@gmail.com'; // Địa chỉ email của bạn
-                $mail->Password = 'aizs gkhv yldi njuy'; // Mật khẩu email của bạn
-
-                // send by h-hotel email
-                $mail->setFrom('loctvpc06110@gmail.com', 'Password Reset');
-                // get email from input
-                $mail->addAddress($email);
-                //$mail->addReplyTo('lamkaizhe16@gmail.com');
-
-                // HTML body
-                $mail->isHTML(true);
-                $mail->Subject = "Recover your password";
-                $mail->Body = "<b>Dear User</b>
-                    <h3>We received a request to reset your password.</h3>
-                    <p>Kindly click the below link to reset your password</p>
-                    http://localhost/login-System/Login-System-main/reset_psw.php
-                    <br><br>
-                    <p>With regrads,</p>
-                    <b>Programming with Lam</b>";
-
-                $mail->send();
-                
-                if (!$mail->send()) {
-                    ?>
-                    <script>
-                        alert("<?php echo " Invalid Email " ?>");
-                    </script>
-                    <?php
-                }
-            }
-
-        }
+        return $stmt;
     }
 
     public function resetPassword()
