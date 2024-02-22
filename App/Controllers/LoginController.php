@@ -1,0 +1,162 @@
+<?php
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use App\Core\BaseRender;
+use App\Models\User;
+
+class LoginController extends BaseController
+{
+
+    private $_renderBase;
+
+    /**
+     * Thuốc trị đau lưng
+     * Copy lại là hết đau lưng
+     * 
+     */
+    function __construct()
+    {
+        parent::__construct();
+        $this->_renderBase = new BaseRender();
+    }
+
+
+    function login()
+    {
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
+        $this->load->render('Admin/Login/login');
+        $this->_renderBase->renderFooterLogin();
+    }
+
+    function forgot()
+    {
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
+        $this->load->render('Admin/Login/forgot');
+        $this->_renderBase->renderFooterLogin();
+    }
+
+    function register()
+    {
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
+        $this->load->render('Admin/Login/register');
+        $this->_renderBase->renderFooterLogin();
+    }
+
+    function reset()
+    {
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
+        $this->load->render('Admin/Login/reset');
+        $this->_renderBase->renderFooterLogin();
+    }
+
+    function loginAdmin()
+    {
+        if(isset($_POST['submit'])){
+            if ($_POST['email'] == "" || $_POST['password'] == ""){
+                $data = [
+                    'error' => 'Vui lòng điền đủ thông tin !'
+                ];
+                $this->_renderBase->renderHeaderLogin();
+                $this->load->render('Admin/Login/login', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
+            } else {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $user = new User();
+            $login = $user->checkLogin($email);  
+
+        if (!password_verify($password, $login['Password'])){
+                $data = [
+                    'error' => 'Email hoặc Mật Khẩu không chính xác !'
+                ];
+                $this->_renderBase->renderHeaderLogin();
+                $this->load->render('Admin/Login/login', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
+            }
+            else {
+                $_SESSION['Admin'] = $login['FullName'];
+                $_SESSION['Role'] = $login['Role'];
+                header('location: ' . ROOT_URL . '?url=HomeController/home');
+            }
+            }
+            
+        }
+
+    }
+
+    function create()
+    {
+        $err = '';
+        if (isset($_POST['submit'])){
+            if ($_POST['email'] == "" || $_POST['password'] == "" || $_POST['fullname'] == ""){
+                $data = [
+                    'error' => 'Vui lòng điền đủ thông tin !'
+                ];
+                $this->_renderBase->renderHeaderLogin();
+                $this->load->render('Admin/Login/register', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
+            }
+            $data = [
+                'Email' => $_POST['email'],
+                'Password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'FullName' => $_POST['fullname']
+            ];
+
+            $register = new User();
+
+            if ($register->invalidEmail($data['Email']) == false){
+                $result = $register->create($data);
+                    header('location: ' . ROOT_URL . '?url=LoginController/login');
+            } else {
+                $data = [
+                    'error' => 'Email không hợp lệ !'
+                ];
+                // echo 'lỗi email';
+                $this->_renderBase->renderHeaderLogin();
+                $this->load->render('Admin/Login/register', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
+            }
+      
+        }
+        
+    }
+
+    function verify (){
+        if(isset($_POST['submit'])){
+            // var_dump($_POST);
+            $email = $_POST['email'];
+            $token = bin2hex($email . time());
+
+            $model = new User();
+            $verify = $model->verificationEmail($email);
+            if ($verify != null){
+                $upToken = $model->updToken($email, $token);
+                if ($upToken) {
+                    $data = [
+                        'email' => $email
+                    ];
+                    $this->load->render('Admin/Login/sendEmail', $data);
+                }
+            } else {
+                header('location: ' . ROOT_URL . '?url=LoginController/login');
+            }
+        }
+    }
+
+    function logout(){
+        $logout = new User();
+        $logout->logout();
+        header('location: ' . ROOT_URL . '?url=LoginController/login');
+    }
+
+}
