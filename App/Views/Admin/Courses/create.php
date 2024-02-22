@@ -36,13 +36,15 @@
                                 >
                         </div>
                         <?php 
-                        if($data['error'] != ''){
-                            ?>
-                                <div class="mb-3 alert alert-danger">
-                                    <?= $data['error']?>
-                                </div>
-                            <?php
-                        }
+                        if (isset($data['error'])){
+                            if($data['error'] != ''){
+                                ?>
+                                    <div class="mb-3 alert alert-danger">
+                                        <?= $data['error']?>
+                                    </div>
+                                <?php
+                            }
+                          }  
                         ?> 
                         <div class=" mb-3">
                             <button name="submit" type="submit" class="btn btn-primary">Thêm</button>

@@ -9,7 +9,7 @@ class Classes extends BaseModel
 
     public $err;
 
-    protected $table = 'Class';
+    protected $table = 'class';
 
 
     public function getAllClass()

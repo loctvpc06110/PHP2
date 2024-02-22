@@ -22,6 +22,12 @@ class BaseRender extends BaseController
     public function renderFooterErr(){
         $this->load->render('layouts/footerErr');
     }
+    public function renderHeaderLogin(){
+        $this->load->render('layouts/headerLogin');
+    }
+    public function renderFooterLogin(){
+        $this->load->render('layouts/footerLogin');
+    }
     public function renderMenu(){
         $this->load->render('layouts/menu');
     }

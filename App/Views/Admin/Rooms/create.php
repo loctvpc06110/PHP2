@@ -21,6 +21,7 @@
                             placeholder="VD: P-101" />
                     </div>
                     <?php 
+                       if (isset($data['error'])){
                         if($data['error'] != ''){
                             ?>
                                 <div class="mb-3 alert alert-danger">
@@ -28,6 +29,7 @@
                                 </div>
                             <?php
                         }
+                      }   
                     ?> 
                     <div class="mb-3">
                         <button name="submit" type="submit" class="btn btn-primary">Thêm</button>

@@ -64,13 +64,13 @@ class Database
     }
 
 
-    public function __destruct()
-    {
-        // Kiểm tra xem kết nối có tồn tại trước khi đóng
-        if ($this->conn) {
-            $this->conn = null;
-        }
-    }
+    // public function __destruct()
+    // {
+    //     // Kiểm tra xem kết nối có tồn tại trước khi đóng
+    //     if ($this->conn) {
+    //         $this->conn = null;
+    //     }
+    // }
 
 
 }

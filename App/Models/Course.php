@@ -9,7 +9,7 @@ class Course extends BaseModel
 
     public $err;
 
-    protected $table = 'Courses';
+    protected $table = 'courses';
 
 
     public function getAllCourse()

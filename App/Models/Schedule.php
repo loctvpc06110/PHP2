@@ -9,16 +9,16 @@ class Schedule extends BaseModel
 
     public $err;
 
-    protected $table = 'ClassSchedule';
+    protected $table = 'classschedule';
 
 
     public function getAllSchedule()
     {
-        $this->_query = "SELECT * FROM `ClassSchedule` 
-        INNER JOIN class ON ClassSchedule.ClassID = class.ClassID
-        INNER JOIN classrooms ON ClassSchedule.RoomID = classrooms.RoomID
-        INNER JOIN courses ON ClassSchedule.CourseID = courses.CourseID
-        INNER JOIN users ON ClassSchedule.TeacherID = users.UserID";
+        $this->_query = "SELECT * FROM `classschedule` 
+        INNER JOIN class ON classschedule.ClassID = class.ClassID
+        INNER JOIN classrooms ON classschedule.RoomID = classrooms.RoomID
+        INNER JOIN courses ON classschedule.CourseID = courses.CourseID
+        INNER JOIN users ON classschedule.TeacherID = users.UserID";
         // return $this;
         $stmt   = $this->_connection->pdo_query($this->_query);
 
@@ -27,11 +27,11 @@ class Schedule extends BaseModel
 
     public function getScheduleNow()
     {
-        $this->_query = "SELECT * FROM `ClassSchedule` 
-        INNER JOIN class ON ClassSchedule.ClassID = class.ClassID
-        INNER JOIN classrooms ON ClassSchedule.RoomID = classrooms.RoomID
-        INNER JOIN courses ON ClassSchedule.CourseID = courses.CourseID
-        INNER JOIN users ON ClassSchedule.TeacherID = users.UserID
+        $this->_query = "SELECT * FROM `classschedule` 
+        INNER JOIN class ON classschedule.ClassID = class.ClassID
+        INNER JOIN classrooms ON classschedule.RoomID = classrooms.RoomID
+        INNER JOIN courses ON classschedule.CourseID = courses.CourseID
+        INNER JOIN users ON classschedule.TeacherID = users.UserID
         WHERE CURDATE() BETWEEN courses.StartDate AND courses.EndDate;";
         // return $this;
         $stmt   = $this->_connection->pdo_query($this->_query);
@@ -41,7 +41,7 @@ class Schedule extends BaseModel
 
     public function checkFK($id, $nameID)
     {
-        $this->_query = "SELECT * FROM `ClassSchedule` WHERE $nameID = $id";
+        $this->_query = "SELECT * FROM `classschedule` WHERE $nameID = $id";
         $stmt   = $this->_connection->pdo_query_one($this->_query);
         return $stmt;
     }

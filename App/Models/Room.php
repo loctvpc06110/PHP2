@@ -13,7 +13,7 @@ class Room extends BaseModel
 
     public $err;
 
-    protected $table = 'ClassRooms';
+    protected $table = 'classrooms';
 
 
     public function getAllRoom()

@@ -25,25 +25,33 @@ class LoginController extends BaseController
     function login()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
         $this->load->render('Admin/Login/login');
+        $this->_renderBase->renderFooterLogin();
     }
 
     function forgot()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
         $this->load->render('Admin/Login/forgot');
+        $this->_renderBase->renderFooterLogin();
     }
 
     function register()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
         $this->load->render('Admin/Login/register');
+        $this->_renderBase->renderFooterLogin();
     }
 
     function reset()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderHeaderLogin();
         $this->load->render('Admin/Login/reset');
+        $this->_renderBase->renderFooterLogin();
     }
 
     function loginAdmin()
@@ -53,7 +61,10 @@ class LoginController extends BaseController
                 $data = [
                     'error' => 'Vui lòng điền đủ thông tin !'
                 ];
+                $this->_renderBase->renderHeaderLogin();
                 $this->load->render('Admin/Login/login', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
             } else {
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -65,7 +76,10 @@ class LoginController extends BaseController
                 $data = [
                     'error' => 'Email hoặc Mật Khẩu không chính xác !'
                 ];
+                $this->_renderBase->renderHeaderLogin();
                 $this->load->render('Admin/Login/login', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
             }
             else {
                 $_SESSION['Admin'] = $login['FullName'];
@@ -86,7 +100,10 @@ class LoginController extends BaseController
                 $data = [
                     'error' => 'Vui lòng điền đủ thông tin !'
                 ];
+                $this->_renderBase->renderHeaderLogin();
                 $this->load->render('Admin/Login/register', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
             }
             $data = [
                 'Email' => $_POST['email'],
@@ -104,7 +121,10 @@ class LoginController extends BaseController
                     'error' => 'Email không hợp lệ !'
                 ];
                 // echo 'lỗi email';
+                $this->_renderBase->renderHeaderLogin();
                 $this->load->render('Admin/Login/register', $data);
+                $this->_renderBase->renderFooterLogin();
+                exit();
             }
       
         }
