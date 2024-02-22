@@ -26,7 +26,7 @@ class Route
             $this->url = rtrim($this->url, '/');
             $this->url = explode('/', filter_var($this->url, FILTER_SANITIZE_URL));
         } else {
-            unset($this->url);
+            header('location: ' . ROOT_URL . '?url=HomeController/home');
         }
     }
 

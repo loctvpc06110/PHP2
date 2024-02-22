@@ -1,6 +1,4 @@
 
-    <!-- Content -->
-
     <!-- Error -->
     <div class="container-xxl container-p-y">
       <div class="misc-wrapper">

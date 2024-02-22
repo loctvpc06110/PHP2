@@ -1,5 +1,9 @@
 <!-- Content -->
-
+<?php
+    if (!isset($_SESSION['Admin'])){
+        echo "<script>document.location='".ROOT_URL."?url=LoginController/login';</script>";
+    }
+?>
     <!--Under Maintenance -->
     <div class="container-xxl container-p-y">
       <div class="misc-wrapper">    
